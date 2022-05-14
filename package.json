@@ -1,0 +1,23 @@
+{
+  "name": "ts-yuri-bot",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^17.0.32",
+    "typescript": "^4.6.4"
+  },
+  "dependencies": {
+    "@types/cron": "^2.0.0",
+    "axios": "^0.27.2",
+    "cron": "^2.0.0",
+    "dotenv": "^16.0.1",
+    "nodemon": "^2.0.16",
+    "snoowrap": "^1.23.0",
+    "ts-node": "^10.7.0",
+    "twitter-api-v2": "^1.12.0"
+  },
+  "scripts": {
+    "watch": "nodemon ./src/index.ts"
+  }
+}
