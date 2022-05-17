@@ -1,18 +1,26 @@
+import { Submission } from "snoowrap";
 import clients from "./clients"
 
+const subreddits: string[] = [
+    "wholesomeyuri",
+    "yuri_jp",
+    "yurification"
+];
 const cache: string[] = [];
 
-export function getRandomImage() {
-    return clients.RedditClient.getSubreddit("wholesomeyuri").getHot({limit: 100}).then(
-        (listing) => {
-            const filtered = listing.filter(e => { 
-                return !e.over_18 && e.url && !cache.includes(e.url);
+export async function getRandomImage() {
+    return (new Promise<Omit<Submission, "then"> | undefined>(async resolve => {
+        let listing: Submission[] = [];
+        for (const sub of subreddits) {
+            const tempsublisting = (await clients.RedditClient.getSubreddit(sub).getHot({limit: 75})).filter(e => {
+                return !e.over_18 && e.url && e.thumbnail !== "self" && !cache.includes(e.url);
             });
-            const returnval = filtered.at(randomIntFromInterval(0, filtered.length - 1));
-            if (returnval) { cache.push(returnval.url); }
-            return returnval;
+            listing = listing.concat(tempsublisting);
         }
-    );
+        const returnval = listing.at(randomIntFromInterval(0, listing.length - 1))
+        if (returnval) { cache.push(returnval.url); }
+        resolve(returnval);
+    }));
 }
 
 

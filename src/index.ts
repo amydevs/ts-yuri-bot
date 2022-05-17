@@ -58,7 +58,7 @@ const CRONJOB = "*/30 * * * *";
             }
         });
     }
-    await functoberun();
+    if (process.env.RUNTEST) { await functoberun(); }
     const job = new CronJob(
         CRONJOB,
             functoberun,
