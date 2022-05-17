@@ -3,7 +3,7 @@ import clients from "./clients"
 export function getRandomImage() {
     return clients.RedditClient.getSubreddit("wholesomeyuri").getHot().then(
         (listing) => {
-            return listing.filter(e => { return !e.over_18 }).at(randomIntFromInterval(0, listing.length - 1))
+            return listing.filter(e => { return !e.over_18 && e.url }).at(randomIntFromInterval(0, listing.length - 1))
         }
     );
 }
