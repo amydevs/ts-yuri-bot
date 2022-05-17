@@ -8,10 +8,6 @@ import { EUploadMimeType } from "twitter-api-v2";
 // const CRONJOB = '* * * * * *';
 const CRONJOB = "*/30 * * * *";
 
-const RUNONCE = false;
-
-let runtimes = 0;
-
 (async () => {
     const uploadImgToTwitter = async (url: string) => {
         let mimetype = EUploadMimeType.Jpeg;
@@ -30,11 +26,6 @@ let runtimes = 0;
         );
     };
     const functoberun = async () => {
-        if (RUNONCE && runtimes > 0) {
-            return;
-        }
-        runtimes = 1;
-
         await getRandomImage().then(async img => {
             if (img) {
                 console.log(img.url);
