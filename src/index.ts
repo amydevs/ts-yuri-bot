@@ -21,7 +21,7 @@ let runtimes = 0;
 
         getRandomImage().then(async img => {
             if (img) {
-                console.log(img)
+                console.log(img.url)
                 const req = await axios.get(img.url, { 
                     responseType: 'arraybuffer'
                 });
