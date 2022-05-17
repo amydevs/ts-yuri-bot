@@ -1,9 +1,10 @@
 import clients from "./clients"
 
 export function getRandomImage() {
-    return clients.RedditClient.getSubreddit("wholesomeyuri").getHot().then(
+    return clients.RedditClient.getSubreddit("wholesomeyuri").getHot({limit: 50}).then(
         (listing) => {
-            return listing.filter(e => { return !e.over_18 && e.url }).at(randomIntFromInterval(0, listing.length - 1))
+            const filtered = listing.filter(e => { return !e.over_18 && e.url });
+            return filtered.at(randomIntFromInterval(0, filtered.length - 1))
         }
     );
 }
