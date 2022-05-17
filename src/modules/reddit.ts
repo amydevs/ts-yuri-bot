@@ -13,7 +13,13 @@ export async function getRandomImage() {
         let listing: Submission[] = [];
         for (const sub of subreddits) {
             const tempsublisting = (await clients.RedditClient.getSubreddit(sub).getHot({limit: 75})).filter(e => {
-                return !e.over_18 && e.url && e.thumbnail !== "self" && !cache.includes(e.url);
+                return (
+                    !e.over_18 && 
+                    e.url && 
+                    e.thumbnail !== "self" &&
+                    e.thumbnail !== "" && 
+                    !cache.includes(e.url)
+                );
             });
             listing = listing.concat(tempsublisting);
         }
