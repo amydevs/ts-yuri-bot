@@ -45,7 +45,13 @@ export async function getRandomImage() {
 }
 
 function getParents(s: Submission) {
-    return (s as any).crosspost_parent_list as Submission[] | undefined;
+    const parents = (s as any).crosspost_parent_list as Submission[] | undefined;
+    if (parents) {
+        return parents.map(e => clients.RedditClient.getSubmission(e.id))
+    }
+    else {
+        return undefined;
+    }
 }
 
 
