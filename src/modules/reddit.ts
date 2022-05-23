@@ -4,7 +4,9 @@ import clients from "./clients"
 const subreddits: string[] = [
     "wholesomeyuri",
     "yuri_jp",
-    "yurification"
+    "yurification",
+    "PolyYuri",
+    "NicoMaki"
 ];
 
 export async function getRandomImage() {
@@ -14,7 +16,7 @@ export async function getRandomImage() {
         let listing: Submission[] = [];
         
         for (const sub of subreddits) {
-            const tempsublisting = (await clients.RedditClient.getSubreddit(sub).getHot({limit: 100})).filter(e => {
+            const tempsublisting = (await clients.RedditClient.getSubreddit(sub).getHot({limit: 75})).filter(e => {
                 return Boolean(
                     !e.over_18 && 
                     e.url && 
