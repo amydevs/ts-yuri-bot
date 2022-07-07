@@ -3,7 +3,6 @@ import clients from "./clients"
 
 const subreddits: string[] = [
     "wholesomeyuri",
-    "yuri_jp",
     "yurification",
     "PolyYuri",
     "NicoMaki"
